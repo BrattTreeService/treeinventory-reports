@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="https://www.bratttree.com/wp-content/uploads/2025/10/badge-logo.svg">
+<title>Bratt Tree — Tree Inventory Report</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{background:#FFF8EC;font-family:'Nunito','Helvetica Neue',sans-serif;font-size:15px;line-height:1.55;color:#1A0E05;-webkit-font-smoothing:antialiased;}
+img{max-width:100%;}
+
+/* ── Hero header ─────────────────────────────────────── */
+.hero{background:#26190E;padding:28px 36px 22px;display:flex;align-items:center;gap:28px;border-bottom:5px solid #EB4C1B;position:relative;}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:5px;background:#EB4C1B;}
+.hero-logo{flex-shrink:0;}
+.hero-logo img{height:96px;width:auto;display:block;}
+.hero-title{flex:1;}
+.hero-eyebrow{font-weight:800;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#E9E71D;margin-bottom:6px;}
+.hero-title h1{font-weight:900;font-size:2.4rem;letter-spacing:0.03em;color:#fff;text-transform:uppercase;line-height:0.98;margin-bottom:8px;}
+.hero-sub{font-weight:600;font-size:14px;color:rgba(255,248,236,0.78);letter-spacing:0.02em;}
+
+/* ── Yellow trust strip ──────────────────────────────── */
+.trust{background:#E9E71D;color:#1A0E05;padding:11px 36px;display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;font-weight:900;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;border-top:3px solid #1A0E05;border-bottom:3px solid #1A0E05;}
+.trust span{display:inline-flex;align-items:center;gap:8px;}
+.trust .sep{color:#26190E;opacity:0.45;font-size:14px;}
+
+/* ── Teal info card ──────────────────────────────────── */
+.info-wrap{padding:28px 36px 0;}
+.info-card{background:#0096AA;color:#fff;border-radius:16px;padding:22px 26px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px 28px;box-shadow:0 6px 18px rgba(0,80,90,.18);}
+.info-card .field label{display:block;font-weight:800;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.78);margin-bottom:6px;}
+.info-card .field .val{font-weight:700;font-size:16px;color:#fff;line-height:1.25;min-height:20px;}
+.info-card .field .val:empty::after{content:"—";color:rgba(255,255,255,0.45);font-weight:600;}
+
+/* ── Stats callout ───────────────────────────────────── */
+.stats{padding:22px 36px 0;}
+.stats-inner{background:#fff;border:1px solid #E8DCC0;border-radius:14px;padding:14px 22px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;box-shadow:0 1px 0 rgba(26,14,5,.04),0 2px 6px rgba(26,14,5,.05);}
+.stat{display:flex;align-items:center;gap:9px;font-weight:600;font-size:13px;color:#4A3826;letter-spacing:0.02em;}
+.stat strong{color:#1A0E05;font-weight:900;font-size:18px;}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+
+/* ── Table ───────────────────────────────────────────── */
+.tw{padding:18px 36px 36px;overflow-x:auto;}
+table{width:100%;border-collapse:collapse;min-width:780px;background:#fff;border:1px solid #E8DCC0;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(26,14,5,.08);}
+thead tr{background:#26190E;}
+th{font-weight:800;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;padding:14px 14px;text-align:left;white-space:nowrap;color:#fff;}
+th.c{text-align:center;}
+tbody tr{border-bottom:1px solid #F0E7CF;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:nth-child(even){background:rgba(245,237,219,0.45);}
+td{padding:10px 14px;font-size:13.5px;font-weight:500;vertical-align:middle;color:#1A0E05;}
+td.ctr{text-align:center;}
+td.cnum{text-align:center;color:#7A4120;font-weight:800;}
+td.cnotes{font-size:12.5px;color:#4A3826;}
+.thumb{width:42px;height:42px;object-fit:cover;border-radius:8px;border:1px solid #E8DCC0;cursor:pointer;transition:transform .12s;display:inline-block;vertical-align:middle;}
+.thumb:hover{transform:scale(1.12);}
+
+/* ── Photo reference ─────────────────────────────────── */
+.photo-section{padding:0 0 0;margin-top:18px;}
+.photo-header{background:#0096AA;color:#fff;padding:18px 36px;font-weight:900;font-size:1.35rem;letter-spacing:0.08em;text-transform:uppercase;border-top:3px solid #1A0E05;border-bottom:3px solid #1A0E05;}
+.photo-header small{display:block;font-weight:700;font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,0.78);margin-top:4px;}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:26px 36px;background:#FFF8EC;}
+.photo-card{border:1px solid #E8DCC0;border-radius:14px;overflow:hidden;background:#fff;break-inside:avoid;box-shadow:0 4px 12px rgba(26,14,5,.08);}
+.photo-card-label{background:#26190E;color:#E9E71D;font-weight:900;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:9px 14px;}
+.photo-card img{width:100%;height:210px;object-fit:cover;display:block;cursor:pointer;}
+.photo-card-meta{padding:9px 14px;font-weight:600;font-size:11.5px;color:#4A3826;line-height:1.45;}
+
+/* ── Footer ──────────────────────────────────────────── */
+footer{background:#26190E;color:#fff;padding:26px 36px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;border-top:5px solid #EB4C1B;}
+footer img{height:64px;width:auto;}
+.foot-text{flex:1;min-width:240px;}
+.foot-tag{font-weight:900;font-size:14px;letter-spacing:0.16em;text-transform:uppercase;color:#E9E71D;line-height:1.2;margin-bottom:6px;}
+.foot-meta{font-weight:600;font-size:12px;color:rgba(255,248,236,0.78);letter-spacing:0.06em;text-transform:uppercase;}
+.foot-meta a{color:#fff;text-decoration:none;border-bottom:1.5px solid #CC813B;}
+.foot-credentials{font-weight:800;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#fff;background:rgba(0,150,170,0.35);padding:8px 14px;border-radius:999px;border:1.5px solid rgba(233,231,29,0.45);}
+
+/* ── Lightbox ────────────────────────────────────────── */
+.lb{display:none;position:fixed;inset:0;background:rgba(26,14,5,0.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:14px;cursor:zoom-out;backdrop-filter:blur(4px);}
+.lb.on{display:flex;}
+.lb img{max-width:92vw;max-height:84vh;border-radius:10px;object-fit:contain;}
+.lb-cap{color:#E9E71D;font-weight:800;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;}
+.lb-x{position:absolute;top:20px;right:22px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:#fff;font-size:18px;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:sans-serif;}
+.lb-x:hover{background:#EB4C1B;border-color:#EB4C1B;}
+
+/* ── Customer action buttons (PDF + Photos zip) ──────── */
+.report-actions{display:flex;flex-direction:column;gap:10px;flex-shrink:0;align-self:center;}
+.report-actions button{font-family:inherit;font-weight:900;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;padding:12px 22px;border-radius:999px;border:none;cursor:pointer;color:#fff;white-space:nowrap;transition:transform .12s, box-shadow .12s, background .12s;box-shadow:0 3px 10px rgba(0,0,0,.35);}
+.report-actions button:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.45);}
+.report-actions button:active{transform:translateY(0);}
+.report-actions button:focus-visible{outline:2px solid #E9E71D;outline-offset:3px;}
+.report-actions button:disabled{opacity:.6;cursor:wait;transform:none;}
+.action-pdf{background:#EB4C1B;}
+.action-pdf:hover{background:#D43F12;}
+.action-zip{background:#0096AA;}
+.action-zip:hover{background:#007D8C;}
+
+@media (max-width:680px){
+  .hero{flex-direction:column;text-align:center;gap:14px;padding:24px 24px 18px;}
+  .info-card{grid-template-columns:1fr 1fr;}
+  .photo-grid{grid-template-columns:1fr;padding:20px;}
+  .trust{font-size:10px;gap:14px;}
+  .tw{padding:12px;}
+  footer{flex-direction:column;text-align:center;}
+  .report-actions{flex-direction:row;width:100%;gap:10px;align-self:stretch;}
+  .report-actions button{flex:1;padding:13px 12px;font-size:12px;letter-spacing:0.1em;}
+}
+@media print{
+  body{background:#fff;}
+  .report-actions{display:none !important;}
+  .photo-section{page-break-before:always;}
+  .photo-grid{grid-template-columns:repeat(2,1fr);gap:18px;padding:18px 20px;}
+  .photo-card img{height:280px;}
+  table{box-shadow:none;}
+  .stats-inner,.info-card{box-shadow:none;}
+  @page{size:portrait;margin:0.8cm;}
+}
+</style></head><body>
+
+<header class="hero">
+  <div class="hero-logo"><img src="https://www.bratttree.com/wp-content/uploads/2025/10/badge-logo.svg" alt="Bratt Tree Company"></div>
+  <div class="hero-title">
+    <div class="hero-eyebrow">Bratt Tree Company</div>
+    <h1>Tree Inventory Report</h1>
+    <div class="hero-sub">Property assessment</div>
+  </div>
+  <div class="report-actions">
+    <button class="action-pdf" onclick="downloadPDF()" type="button">↓ Download PDF</button>
+    
+  </div>
+</header>
+
+<div class="trust">
+  <span>Family Owned Since 1991</span><span class="sep">•</span>
+  <span>ISA-Certified Arborists</span><span class="sep">•</span>
+  <span>Licensed & Insured</span><span class="sep">•</span>
+  <span>A+ Rated</span>
+</div>
+
+<div class="info-wrap">
+  <div class="info-card">
+    <div class="field"><label>Site / Location</label><div class="val"></div></div>
+    <div class="field"><label>Date Inspected</label><div class="val"></div></div>
+    <div class="field"><label>Arborist</label><div class="val"></div></div>
+    <div class="field"><label>Weather</label><div class="val"></div></div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat"><strong>5</strong> Trees Inspected</div>
+    <div class="stat"><span class="dot" style="background:#448629"></span><strong>0</strong> Fair</div>
+    <div class="stat"><span class="dot" style="background:#A35817"></span><strong>0</strong> Poor / Disease</div>
+    <div class="stat"><span class="dot" style="background:#B83410"></span><strong>0</strong> Dead / Defective</div>
+  </div>
+</div>
+
+<div class="tw"><table>
+<thead><tr><th class="c">#</th><th>Species</th><th>DBH</th><th>Condition</th><th>Notes / Detail</th><th class="c">75' Setback</th><th class="c">Photo</th></tr></thead>
+<tbody><tr>
+      <td class="cnum">1</td>
+      <td></td>
+      <td></td>
+      <td style="color:#A35817;font-weight:700;"></td>
+      <td class="cnotes"></td>
+      <td class="ctr" style="color:#7A4120;font-weight:700;">N</td>
+      <td class="ctr">
+      </td></tr><tr>
+      <td class="cnum">2</td>
+      <td></td>
+      <td></td>
+      <td style="color:#A35817;font-weight:700;"></td>
+      <td class="cnotes"></td>
+      <td class="ctr" style="color:#7A4120;font-weight:700;">N</td>
+      <td class="ctr">
+      </td></tr><tr>
+      <td class="cnum">3</td>
+      <td></td>
+      <td></td>
+      <td style="color:#A35817;font-weight:700;"></td>
+      <td class="cnotes"></td>
+      <td class="ctr" style="color:#7A4120;font-weight:700;">N</td>
+      <td class="ctr">
+      </td></tr><tr>
+      <td class="cnum">4</td>
+      <td></td>
+      <td></td>
+      <td style="color:#A35817;font-weight:700;"></td>
+      <td class="cnotes"></td>
+      <td class="ctr" style="color:#7A4120;font-weight:700;">N</td>
+      <td class="ctr">
+      </td></tr><tr>
+      <td class="cnum">5</td>
+      <td></td>
+      <td></td>
+      <td style="color:#A35817;font-weight:700;"></td>
+      <td class="cnotes"></td>
+      <td class="ctr" style="color:#7A4120;font-weight:700;">N</td>
+      <td class="ctr">
+      </td></tr></tbody>
+</table></div>
+
+
+
+<footer>
+  <img src="https://www.bratttree.com/wp-content/uploads/2025/10/badge-logo.svg" alt="Bratt Tree Company">
+  <div class="foot-text">
+    <div class="foot-tag">Trees are our business. Safety is our promise.</div>
+    <div class="foot-meta">
+      <a href="https://www.bratttree.com">BrattTree.com</a>  ·  651-236-8193
+    </div>
+  </div>
+  <div class="foot-credentials">ISA-Certified · Licensed & Insured · No Subcontractors</div>
+</footer>
+
+<div class="lb" id="lb" onclick="this.classList.remove('on')">
+  <button class="lb-x" onclick="event.stopPropagation();document.getElementById('lb').classList.remove('on')">✕</button>
+  <img id="lb-img" src="" alt=""><div class="lb-cap" id="lb-cap"></div>
+</div>
+<script>
+function openLb(src,cap){var lb=document.getElementById('lb');document.getElementById('lb-img').src=src;document.getElementById('lb-cap').textContent=cap||'';lb.classList.add('on');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lb').classList.remove('on');});
+
+var PHOTO_DATA=[];
+var ZIP_NAME="bratt-tree-photos-inventory.zip";
+
+function downloadPDF(){window.print();}
+
+function downloadAllPhotos(btn){
+  if(!PHOTO_DATA||!PHOTO_DATA.length){alert('No photos in this report.');return;}
+  var orig=btn.textContent;
+  btn.disabled=true;btn.textContent='Preparing zip…';
+  var existing=document.querySelector('script[data-jszip]');
+  function build(){
+    try{
+      var zip=new JSZip();
+      PHOTO_DATA.forEach(function(p){
+        var base64=(p.dataUrl||'').split(',')[1]||'';
+        zip.file(p.filename,base64,{base64:true});
+      });
+      zip.generateAsync({type:'blob'}).then(function(blob){
+        var a=document.createElement('a');
+        a.href=URL.createObjectURL(blob);
+        a.download=ZIP_NAME;
+        document.body.appendChild(a);a.click();document.body.removeChild(a);
+        setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+        btn.disabled=false;btn.textContent=orig;
+      },function(err){
+        alert('Could not build zip: '+(err&&err.message||err));
+        btn.disabled=false;btn.textContent=orig;
+      });
+    }catch(e){
+      alert('Could not build zip: '+e.message);
+      btn.disabled=false;btn.textContent=orig;
+    }
+  }
+  if(window.JSZip){build();return;}
+  if(existing){existing.addEventListener('load',build);return;}
+  var s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+  s.setAttribute('data-jszip','1');
+  s.onload=build;
+  s.onerror=function(){btn.disabled=false;btn.textContent=orig;alert('Could not load zip library — check your internet connection and try again.');};
+  document.head.appendChild(s);
+}
+</script>
+</body></html>
